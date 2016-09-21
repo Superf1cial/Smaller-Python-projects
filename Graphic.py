@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.dates as dates
-import csv
+import csv, os
 import datetime as dt
-
 
 
 fig = plt.figure()
