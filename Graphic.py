@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.dates as dates
-import csv, os
+import csv
 import datetime as dt
 
 
