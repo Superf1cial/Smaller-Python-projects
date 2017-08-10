@@ -1,57 +1,50 @@
 import time
+import imaplib
+import getpass
 
-Monday_Episodes = []
-Tuesday_Episodes = []
-Wednesday_Episodes = []
-Thursday_Episodes = []
-Friday_Episodes = []
-Saturday_Episodes = []
-Sunday_Episodes = []
-
-def add_series(keyword):
-    day, name = keyword.split(", ")
-    print("Adding {} to {}list".format(name,day))
-    if day == "Monday":
-        Monday_Episodes.append(name)
-        print(Monday_Episodes)
-    elif day == "Tuesday":
-        Tuesday_Episodes.append(name)
-        print(Tuesday_Episodes)
-    elif day == "Wednesday":
-        Wednesday_Episodes.append(name)
-        print(Wednesday_Episodes)
-    elif day == "Thursday":
-        Thursday_Episodes.append(name)
-        print(Thursday_Episodes)
-    elif day == "Friday":
-        Friday_Episodes.append(name)
-        print(Friday_Episodes)
-    elif day == "Saturday":
-        Saturday_Episodes.append(name)
-        print(Saturday_Episodes)
-    elif day == "Sunday":
-        Sunday_Episodes.append(name)
-        print(Sunday_Episodes)
-
-def print_current_day():
-    current_day = time.strftime("%a")
-    if current_day == "Mon":
-        print("Sending update for Monday")
-    elif current_day == "Tue":
-        print("Sending update for Tuesday")
-    elif current_day == "Wed":
-        print("Sending update for Wednesday")
-    elif current_day == "Thu":
-        print("Sending update for Thursday")
-    elif current_day == "Fri":
-        print("Sending update for Friday")
-    elif current_day == "Sat":
-        print("Sending update for Saturday")
-    elif current_day == "Sun":
-        print("Sending update for Sunday")
+user = input("Enter your GMail username: ")
+pwd = getpass.getpass("Enter your password: ")
 
 
-while True:
-    print_current_day()
-    keyword = input("Enter series name in format(Day, Name): ")
-    add_series(keyword)
+print("Setting up reminder lists")
+
+Thursday_List = ["Testvalue1","Testvalue2"]
+
+print("Getting current date")
+current_day = time.strftime("%A %d %m %Y")
+current_day = current_day.split(" ")
+print("Done, checking for reminder list")
+
+def remind_you(selected_list):
+    print("Logging into Google Mail - {}".format(time.strftime("%H:%M:%S")))
+    m = imaplib.IMAP4_SSL("smtp.gmail.com")
+    m.login(user,pwd)
+
+if current_day[0] == "Monday":
+    print("Reminding you for Monday Episodes")
+    selected_list = Monday_List
+    remind_you(selected_list)
+elif current_day[0] == "Tuesday":
+    print("Reminding you for Tuesday Episodes")
+    selected_list = Tuesday_List
+    remind_you(selected_list)
+elif current_day[0] == "Wednesday":
+    print("Reminding you for Wednesday Episodes")
+    selected_list = Wednesday_List
+    remind_you(selected_list)
+elif current_day[0] == "Thursday":
+    print("Reminding you for Thursday Episodes")
+    selected_list = Thursday_List
+    remind_you(selected_list)
+elif current_day[0] == "Friday":
+    print("Reminding you for Friday Episodes")
+    selected_list = Friday_List
+    remind_you(selected_list)
+elif current_day[0] == "Saturday":
+    print("Reminding you for Saturday Episodes")
+    selected_list = Saturday_List
+    remind_you(selected_list)
+elif current_day[0] == "Sunday":
+    print("Reminding you for Sunday Episodes")
+    selected_list = Sunday_List
+    remind_you(selected_list)
